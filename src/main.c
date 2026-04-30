@@ -246,23 +246,9 @@ void runBrowser(Browser *b) {
    MAIN
    ================================================================ */
 
-int main(int argc, char *argv[]) {
+int main(void) {
     Browser browser;
     browserInit(&browser);
-
-    /* Tentukan folder config:
-       - Jika ada argumen pertama, gunakan itu sebagai config folder
-       - Default: "config/" */
-    const char *config_folder = "config/";
-    if (argc >= 2) {
-        config_folder = argv[1];
-    }
-
-    /* Coba load dari CSV terlebih dahulu.
-       Jika gagal (file tidak ada), fungsi ini sudah otomatis
-       fallback ke browserLoadDummyData(). */
-    browserLoadFromCSV(&browser, config_folder);
-
     runBrowser(&browser);
     setDestroy(&browser.urlSet);
     return 0;

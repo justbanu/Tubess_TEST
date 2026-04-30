@@ -10,7 +10,6 @@
 #include "adt_list.h"
 #include "tabs.h"
 #include "lcg.h"
-#include "csv_parser.h"
 
 /* ========== Browser State ========== */
 typedef struct {
@@ -19,7 +18,7 @@ typedef struct {
     Set            urlSet;      /* ADT Set untuk lookup cepat */
     Map            cache;       /* ADT Map untuk caching */
     DownloadQueue  dlQueue;     /* ADT Queue untuk download manager */
-    Graph          webGraph;    /* ADT Graph untuk web graph (STI) */
+    Graph          webGraph;    /* ADT Graph untuk web graph */
     TabManager     tabMgr;      /* manajemen tab */
     LCG            rng;         /* random number generator */
 
@@ -32,18 +31,6 @@ typedef struct {
 
 /* ========== Inisialisasi ========== */
 void browserInit(Browser *b);
-void browserLoadDummyData(Browser *b);
-
-/* ========== Load dari CSV (STI: menyesuaikan file yang diberikan) ========== */
-/* Load web_pages.csv dan linked_pages.csv dari folder config.
-   Return 1 jika berhasil, 0 jika ada error (tapi tetap lanjut dengan data kosong). */
-int  browserLoadFromCSV(Browser *b, const char *config_folder);
-
-/* Rebuild graph dari ldb setelah load CSV */
-void browserRebuildGraph(Browser *b);
-
-/* Rebuild urlSet dari db setelah load CSV */
-void browserRebuildUrlSet(Browser *b);
 
 /* ========== Helper ========== */
 void browserOpenPage(Browser *b, const char *url, int add_to_history);

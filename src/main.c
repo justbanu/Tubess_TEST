@@ -16,7 +16,7 @@ static void printBanner(void) {
     printf(" | |\\  |/ ___ \\| |\\  | |_| | |_| |  _ <  |  _/ ___ \\| |___| |___ ___) |\n");
     printf(" |_| \\_/_/   \\_\\_| \\_|\\____|\\___/|_| \\_\\ |_|/_/   \\_\\_____|_____|____/\n");
     printf(COLOR_RESET);
-    printf(COLOR_YELLOW "                  ✦ Terminal Web Browser ✦ STI Edition ✦\n" COLOR_RESET);
+    printf(COLOR_YELLOW "                  _ Terminal Web Browser ✦ STI Edition _\n" COLOR_RESET);
     printf(COLOR_DIM    "                      IF1210 Algortima & Pemrograman 1\n" COLOR_RESET);
     printf("\n");
 }

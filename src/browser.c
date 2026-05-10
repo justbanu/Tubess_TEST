@@ -35,6 +35,46 @@ int browserCalcTicks(const char *url) {
     return len / 5 + 2;
 }
 
+/* E01: ^(?!-)[A-Za-z0-9-]{1,63}(?<!-)(\.[A-Za-z]{2,})+$ */
+int isValidUrl(const char *url) {
+    int len = (int)strlen(url);
+    if (len == 0) return 0;
+    if (url[0] == '-') return 0;
+    int i = 0;
+    while (i < len && url[i] != '.') {
+        char c = url[i];
+        if (!isalnum((unsigned char)c) && c != '-') return 0;
+        i++;
+    }
+    if (i == 0 || i > 63) return 0;
+    if (url[i - 1] == '-') return 0;
+    if (i >= len) return 0;
+    while (i < len) {
+        if (url[i] != '.') return 0;
+        i++;
+        int tld_start = i;
+        while (i < len && url[i] != '.') {
+            if (!isalpha((unsigned char)url[i])) return 0;
+            i++;
+        }
+        if (i - tld_start < 2) return 0;
+    }
+    return 1;
+}
+
+/* E02: bilangan bulat positif, max 6 digit (max 999999) */
+int isValidNumeric(const char *s) {
+    if (!s || s[0] == '\0') return 0;
+    int len = 0;
+    for (int i = 0; s[i]; i++) {
+        if (!isdigit((unsigned char)s[i])) return 0;
+        len++;
+    }
+    if (len == 0 || len > 6) return 0;
+    int val = atoi(s);
+    return (val > 0 && val <= 999999);
+}
+
 void browserShowPage(Browser *b, const char *url, const char *content) {
     printf("\n");
     printf(COLOR_CYAN "╔══════════════════════════════════════╗\n" COLOR_RESET);

@@ -90,6 +90,10 @@ void cmdSearch(Browser *b, const char *query) {
    ================================================================ */
 
 void cmdOpen(Browser *b, const char *url) {
+    if (!isValidUrl(url)) {
+        printf(COLOR_RED "URL tidak valid!\n" COLOR_RESET);
+        return;
+    }
     browserOpenPage(b, url, 1);
 }
 
@@ -338,6 +342,10 @@ static void readMultilineInput(char *buf, int maxlen) {
 }
 
 void cmdAddPage(Browser *b, const char *url) {
+    if (!isValidUrl(url)) {
+        printf(COLOR_RED "URL tidak valid!\n" COLOR_RESET);
+        return;
+    }
     if (urlExists(&b->db, url)) {
         printf(COLOR_RED "Sudah terdapat halaman dengan URL %s." COLOR_RESET
                " Gunakan URL lain yang belum terdaftar!\n", url);
@@ -374,6 +382,10 @@ void cmdAddPage(Browser *b, const char *url) {
 
         if (strcmp(linked_url, "DONE") == 0) break;
 
+        if (!isValidUrl(linked_url)) {
+            printf(COLOR_RED "  URL tidak valid!\n" COLOR_RESET);
+            continue;
+        }
         WebPage *target = findWebPageByUrl(&b->db, linked_url);
         if (!target) {
             printf(COLOR_RED "  URL tidak ditemukan!\n" COLOR_RESET);
@@ -388,6 +400,10 @@ void cmdAddPage(Browser *b, const char *url) {
 }
 
 void cmdEditPage(Browser *b, const char *url) {
+    if (!isValidUrl(url)) {
+        printf(COLOR_RED "URL tidak valid!\n" COLOR_RESET);
+        return;
+    }
     WebPage *page = findWebPageByUrl(&b->db, url);
     if (!page) {
         printf(COLOR_RED "Tidak ada halaman dengan URL %s!\n" COLOR_RESET, url);
@@ -447,13 +463,18 @@ void cmdEditPage(Browser *b, const char *url) {
 
             /* Proses input pertama */
             if (strcmp(linked_url, "DONE") != 0) {
-                WebPage *target = findWebPageByUrl(&b->db, linked_url);
-                if (!target) {
-                    printf(COLOR_RED "  URL tidak ditemukan!\n" COLOR_RESET);
+                WebPage *target = NULL;
+                if (!isValidUrl(linked_url)) {
+                    printf(COLOR_RED "  URL tidak valid!\n" COLOR_RESET);
                 } else {
-                    addLinkedPage(&b->ldb, page->id, target->id);
-                    graphAddEdge(&b->webGraph, page->id, target->id);
-                    printf(COLOR_GREEN "  → %s ditambahkan.\n" COLOR_RESET, linked_url);
+                    target = findWebPageByUrl(&b->db, linked_url);
+                    if (!target) {
+                        printf(COLOR_RED "  URL tidak ditemukan!\n" COLOR_RESET);
+                    } else {
+                        addLinkedPage(&b->ldb, page->id, target->id);
+                        graphAddEdge(&b->webGraph, page->id, target->id);
+                        printf(COLOR_GREEN "  → %s ditambahkan.\n" COLOR_RESET, linked_url);
+                    }
                 }
                 /* Lanjut input berikutnya */
                 while (1) {
@@ -463,6 +484,10 @@ void cmdEditPage(Browser *b, const char *url) {
                     len = (int)strlen(linked_url);
                     if (len > 0 && linked_url[len-1] == '\n') linked_url[--len] = '\0';
                     if (strcmp(linked_url, "DONE") == 0) break;
+                    if (!isValidUrl(linked_url)) {
+                        printf(COLOR_RED "  URL tidak valid!\n" COLOR_RESET);
+                        continue;
+                    }
                     target = findWebPageByUrl(&b->db, linked_url);
                     if (!target) {
                         printf(COLOR_RED "  URL tidak ditemukan!\n" COLOR_RESET);
@@ -480,6 +505,10 @@ void cmdEditPage(Browser *b, const char *url) {
 }
 
 void cmdDeletePage(Browser *b, const char *url) {
+    if (!isValidUrl(url)) {
+        printf(COLOR_RED "URL tidak valid!\n" COLOR_RESET);
+        return;
+    }
     WebPage *page = findWebPageByUrl(&b->db, url);
     if (!page) {
         printf(COLOR_RED "Tidak ada halaman dengan URL %s!\n" COLOR_RESET, url);
@@ -521,6 +550,10 @@ void cmdDeletePage(Browser *b, const char *url) {
    ================================================================ */
 
 void cmdDownload(Browser *b, const char *url) {
+    if (!isValidUrl(url)) {
+        printf(COLOR_RED "URL tidak valid!\n" COLOR_RESET);
+        return;
+    }
     if (!urlExists(&b->db, url)) {
         printf(COLOR_RED "404 Not Found! URL tidak ada dalam database.\n" COLOR_RESET);
         return;

@@ -36,6 +36,8 @@ void browserInit(Browser *b);
 void browserOpenPage(Browser *b, const char *url, int add_to_history);
 void browserShowPage(Browser *b, const char *url, const char *content);
 int  browserCalcTicks(const char *url);
+int  isValidUrl(const char *url);
+int  isValidNumeric(const char *s);
 
 /* ========== Command Handlers ========== */
 void cmdDiscover(Browser *b);

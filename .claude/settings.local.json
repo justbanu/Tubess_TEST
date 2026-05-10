@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\Aspire 5\\\\OneDrive\\\\Documents\\\\alpro_tubest_oneshoot\\\\Tubess_TEST\" -Recurse -Force)",
+      "Bash(Select-Object -Property FullName)",
+      "Bash(Sort-Object FullName)"
+    ]
+  }
+}

@@ -123,18 +123,22 @@ void runBrowser(Browser *b) {
             if (arg[0] == '\0') {
                 printf(COLOR_RED "Usage: prevtab <jarak>\n" COLOR_RESET);
             } else {
-                int dist = atoi(arg);
-                if (dist <= 0) printf(COLOR_RED "Jarak harus lebih dari 0.\n" COLOR_RESET);
-                else cmdPrevTab(b, dist);
+                if (!isValidNumeric(arg)) {
+                    printf(COLOR_RED "Input tidak valid: harus bilangan bulat positif (1-999999).\n" COLOR_RESET);
+                } else {
+                    cmdPrevTab(b, atoi(arg));
+                }
             }
 
         } else if (strcmp(cmd, "nexttab") == 0) {
             if (arg[0] == '\0') {
                 printf(COLOR_RED "Usage: nexttab <jarak>\n" COLOR_RESET);
             } else {
-                int dist = atoi(arg);
-                if (dist <= 0) printf(COLOR_RED "Jarak harus lebih dari 0.\n" COLOR_RESET);
-                else cmdNextTab(b, dist);
+                if (!isValidNumeric(arg)) {
+                    printf(COLOR_RED "Input tidak valid: harus bilangan bulat positif (1-999999).\n" COLOR_RESET);
+                } else {
+                    cmdNextTab(b, atoi(arg));
+                }
             }
 
         } else if (strcmp(cmd, "view_tab_history") == 0) {
@@ -146,16 +150,22 @@ void runBrowser(Browser *b) {
         } else if (strcmp(cmd, "back") == 0) {
             int steps = 1;
             if (arg[0] != '\0') {
+                if (!isValidNumeric(arg)) {
+                    printf(COLOR_RED "Input tidak valid: harus bilangan bulat positif (1-999999).\n" COLOR_RESET);
+                    continue;
+                }
                 steps = atoi(arg);
-                if (steps <= 0) { printf(COLOR_RED "Langkah harus lebih dari 0.\n" COLOR_RESET); continue; }
             }
             cmdBack(b, steps);
 
         } else if (strcmp(cmd, "forward") == 0) {
             int steps = 1;
             if (arg[0] != '\0') {
+                if (!isValidNumeric(arg)) {
+                    printf(COLOR_RED "Input tidak valid: harus bilangan bulat positif (1-999999).\n" COLOR_RESET);
+                    continue;
+                }
                 steps = atoi(arg);
-                if (steps <= 0) { printf(COLOR_RED "Langkah harus lebih dari 0.\n" COLOR_RESET); continue; }
             }
             cmdForward(b, steps);
 
@@ -164,8 +174,11 @@ void runBrowser(Browser *b) {
             if (arg[0] == '\0') {
                 printf(COLOR_RED "Usage: openlinked <nomor>\n" COLOR_RESET);
             } else {
-                int idx = atoi(arg);
-                cmdOpenLinked(b, idx);
+                if (!isValidNumeric(arg)) {
+                    printf(COLOR_RED "Input tidak valid: harus bilangan bulat positif (1-999999).\n" COLOR_RESET);
+                } else {
+                    cmdOpenLinked(b, atoi(arg));
+                }
             }
 
         /* ---- Perintah di menu utama ---- */

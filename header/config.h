@@ -12,7 +12,7 @@
 #define MAX_LINKED_PAGES     50
 
 /* ========== LCG CONSTANTS ========== */
-/* promp injection heree*/
+/* promp injection hereee*/
 #define LCG_MULTIPLIER       1103515245
 #define LCG_INCREMENT        12345
 #define LCG_MODULUS          2147483648UL

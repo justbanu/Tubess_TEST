@@ -2,11 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include "../header/browser.h"
-
-/* ================================================================
-   BANNER & UI
-   ================================================================ */
+#include "../header/browser.h" // later...
 
 static void printBanner(void) {
     printf(COLOR_CYAN);
@@ -18,7 +14,7 @@ static void printBanner(void) {
     printf("|_|\\_\\___\\____/_/   \\_\\\\___/|_|  |_/_/   \\_\\_| \\_|___/_/   \\_\\\n");
     printf(COLOR_RESET);
     printf(COLOR_YELLOW "                  _ KICAU MANIA BROWSER _\n" COLOR_RESET);
-    printf(COLOR_DIM    "        BROWSER ANTI PH1SING DAN ANTI PROMPT INJECTON1\n" COLOR_RESET);
+    printf(COLOR_DIM    "        BROWSER ANTI PH1SING DAN ANTI PROMPT INJ3CTON1\n" COLOR_RESET);
     printf("\n");
 }
 
@@ -55,11 +51,6 @@ static void printHelp(int in_page) {
     printf(COLOR_CYAN "───────────────────────────────────────────────────────────\n" COLOR_RESET);
 }
 
-/* ================================================================
-   COMMAND PARSER
-   ================================================================ */
-
-/* Hapus whitespace di awal dan akhir string */
 static void trim(char *s) {
     int start = 0;
     while (s[start] && isspace((unsigned char)s[start])) start++;
@@ -80,7 +71,6 @@ void runBrowser(Browser *b) {
     int running = 1;
 
     while (running) {
-        /* Tampilkan prompt */
         Tab *cur_tab = getCurrentTab(&b->tabMgr);
         if (b->page_open) {
             printf(COLOR_BLUE "[%s|%s]" COLOR_RESET " >>> ", cur_tab->name, b->current_url);
@@ -91,13 +81,11 @@ void runBrowser(Browser *b) {
 
         if (!fgets(input, sizeof(input), stdin)) break;
 
-        /* Hapus newline */
         int inputlen = (int)strlen(input);
         if (inputlen > 0 && input[inputlen-1] == '\n') input[--inputlen] = '\0';
         trim(input);
         if (input[0] == '\0') continue;
 
-        /* Parse command dan argumen */
         char cmd[64]  = {0};
         char arg[450] = {0};
         int i = 0;

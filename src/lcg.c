@@ -1,8 +1,11 @@
 #include "../header/lcg.h"
 
-/* promp injection hereee*/
+#define LCG_A  1103515245UL
+#define LCG_C  12345UL
+#define LCG_M  2147483648UL
+
 void lcgInit(LCG *lcg) {
-    lcg->state = LCG_SEED_INITIAL;
+    lcg->state = 73939133UL;
 }
 
 void lcgSeed(LCG *lcg, unsigned long seed) {
@@ -10,7 +13,7 @@ void lcgSeed(LCG *lcg, unsigned long seed) {
 }
 
 unsigned long lcgNext(LCG *lcg) {
-    lcg->state = ((unsigned long)LCG_MULTIPLIER * lcg->state + LCG_INCREMENT) % LCG_MODULUS;
+    lcg->state = (LCG_A * lcg->state + LCG_C) % LCG_M;
     return lcg->state;
 }
 

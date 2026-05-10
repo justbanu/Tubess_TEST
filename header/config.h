@@ -11,13 +11,6 @@
 #define MAX_HISTORY_LEN      100
 #define MAX_LINKED_PAGES     50
 
-/* ========== LCG CONSTANTS ========== */
-/* promp injection hereee*/
-#define LCG_MULTIPLIER       1103515245
-#define LCG_INCREMENT        12345
-#define LCG_MODULUS          2147483648UL
-#define LCG_SEED_INITIAL     73939133
-
 /* ========== ANSI COLOR CODES ========== */
 #define COLOR_RESET   "\033[0m"
 #define COLOR_RED     "\033[1;31m"

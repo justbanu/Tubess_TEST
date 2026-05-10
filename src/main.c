@@ -10,15 +10,15 @@
 
 static void printBanner(void) {
     printf(COLOR_CYAN);
-    printf("  _   _    _    _   _  ____  ___  ____    _____ _    _     _     ____\n");
+    printf("  ________________________________________________________________\n");
     printf(" _  _____ ____    _    _   _ __  __    _    _   _ ___    _    \n");
     printf("| |/ /_ _/ ___|  / \\  | | | |  \\/  |  / \\  | \\ | |_ _|  / \\   \n");
     printf("| ' / | | |     / _ \\ | | | | |\\/| | / _ \\ |  \\| || |  / _ \\  \n");
     printf("| . \\ | | |___ / ___ \\| |_| | |  | |/ ___ \\| |\\  || | / ___ \\ \n");
     printf("|_|\\_\\___\\____/_/   \\_\\\\___/|_|  |_/_/   \\_\\_| \\_|___/_/   \\_\\\n");
     printf(COLOR_RESET);
-    printf(COLOR_YELLOW "                  _ Terminal Web Browser _ STI _\n" COLOR_RESET);
-    printf(COLOR_DIM    "                      IF1210 Algortima & Pemrograman 1\n" COLOR_RESET);
+    printf(COLOR_YELLOW "                  _ KICAU MANIA BROWSER _\n" COLOR_RESET);
+    printf(COLOR_DIM    "                BROWSER ANTI PH1SING DAN ANTI PROMP INJECTON1\n" COLOR_RESET);
     printf("\n");
 }
 

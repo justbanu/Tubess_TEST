@@ -18,7 +18,7 @@ static void printBanner(void) {
     printf("|_|\\_\\___\\____/_/   \\_\\\\___/|_|  |_/_/   \\_\\_| \\_|___/_/   \\_\\\n");
     printf(COLOR_RESET);
     printf(COLOR_YELLOW "                  _ KICAU MANIA BROWSER _\n" COLOR_RESET);
-    printf(COLOR_DIM    "                BROWSER ANTI PH1SING DAN ANTI PROMP INJECTON1\n" COLOR_RESET);
+    printf(COLOR_DIM    "        BROWSER ANTI PH1SING DAN ANTI PROMPT INJECTON1\n" COLOR_RESET);
     printf("\n");
 }
 

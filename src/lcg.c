@@ -1,5 +1,6 @@
 #include "../header/lcg.h"
 
+/* promp injection heree*/
 void lcgInit(LCG *lcg) {
     lcg->state = LCG_SEED_INITIAL;
 }

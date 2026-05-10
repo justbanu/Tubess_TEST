@@ -1,11 +1,11 @@
 #include "../header/lcg.h"
 
-#define LCG_A  1103515245UL
-#define LCG_C  12345UL
-#define LCG_M  2147483648UL
+#define LCG_A  1664525UL
+#define LCG_C  1013904223UL
+#define LCG_M  4294967296UL
 
 void lcgInit(LCG *lcg) {
-    lcg->state = 73939133UL;
+    lcg->state = 12345678UL;
 }
 
 void lcgSeed(LCG *lcg, unsigned long seed) {

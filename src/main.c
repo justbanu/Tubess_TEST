@@ -76,9 +76,9 @@ void runBrowser(Browser *b) {
     while (running) {
         Tab *cur_tab = getCurrentTab(&b->tabMgr);
         if (b->page_open) {
-            printf(COLOR_BLUE "[%s|%s]" COLOR_RESET " >>> ", cur_tab->name, b->current_url);
+            printf(COLOR_BLUE "[%s|%s]" COLOR_RESET " >>> ", b->current_url, cur_tab->name);
         } else {
-            printf(COLOR_BLUE "[%s|HOME]" COLOR_RESET " >>> ", cur_tab->name);
+            printf(COLOR_BLUE "[HOME|%s]" COLOR_RESET " >>> ", cur_tab->name);
         }
         fflush(stdout);
 

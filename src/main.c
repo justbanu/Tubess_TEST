@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <ctype.h>
 #include "../header/browser.h" // later...
 
 static void printBanner(void) {
@@ -51,16 +50,20 @@ static void printHelp(int in_page) {
     printf(COLOR_CYAN "───────────────────────────────────────────────────────────\n" COLOR_RESET);
 }
 
+static int isSpaceChar(char c) {
+    return c == ' ' || c == '\t' || c == '\n' || c == '\r' || c == '\v' || c == '\f';
+}
+
 static void trim(char *s) {
     int start = 0;
-    while (s[start] && isspace((unsigned char)s[start])) start++;
+    while (s[start] && isSpaceChar(s[start])) start++;
     if (start > 0) {
         int i = 0;
         while (s[start + i]) { s[i] = s[start + i]; i++; }
         s[i] = '\0';
     }
     int end = (int)strlen(s) - 1;
-    while (end >= 0 && isspace((unsigned char)s[end])) { s[end] = '\0'; end--; }
+    while (end >= 0 && isSpaceChar(s[end])) { s[end] = '\0'; end--; }
 }
 
 void runBrowser(Browser *b) {
@@ -89,12 +92,12 @@ void runBrowser(Browser *b) {
         char cmd[64]  = {0};
         char arg[450] = {0};
         int i = 0;
-        while (input[i] && !isspace((unsigned char)input[i])) {
+        while (input[i] && !isSpaceChar(input[i])) {
             if (i < 63) cmd[i] = input[i];
             i++;
         }
         cmd[i < 63 ? i : 63] = '\0';
-        while (input[i] && isspace((unsigned char)input[i])) i++;
+        while (input[i] && isSpaceChar(input[i])) i++;
         strncpy(arg, input + i, sizeof(arg) - 1);
         arg[sizeof(arg) - 1] = '\0';
         trim(arg);
@@ -195,7 +198,7 @@ void runBrowser(Browser *b) {
                 query[MAX_URL_LEN - 1] = '\0';
                 /* Potong di spasi pertama */
                 for (int qi = 0; query[qi]; qi++) {
-                    if (isspace((unsigned char)query[qi])) { query[qi] = '\0'; break; }
+                    if (isSpaceChar(query[qi])) { query[qi] = '\0'; break; }
                 }
                 cmdSearch(b, query);
             }

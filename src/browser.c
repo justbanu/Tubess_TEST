@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <ctype.h>
 #include "../header/browser.h"
 #include "../header/data.h"
 
@@ -35,6 +34,18 @@ int browserCalcTicks(const char *url) {
     return len / 5 + 2;
 }
 
+static int isDigitChar(char c) {
+    return c >= '0' && c <= '9';
+}
+
+static int isAlphaChar(char c) {
+    return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');
+}
+
+static int isAlnumChar(char c) {
+    return isAlphaChar(c) || isDigitChar(c);
+}
+
 /* E01: ^(?!-)[A-Za-z0-9-]{1,63}(?<!-)(\.[A-Za-z]{2,})+$ */
 int isValidUrl(const char *url) {
     int len = (int)strlen(url);
@@ -43,7 +54,7 @@ int isValidUrl(const char *url) {
     int i = 0;
     while (i < len && url[i] != '.') {
         char c = url[i];
-        if (!isalnum((unsigned char)c) && c != '-') return 0;
+        if (!isAlnumChar(c) && c != '-') return 0;
         i++;
     }
     if (i == 0 || i > 63) return 0;
@@ -54,7 +65,7 @@ int isValidUrl(const char *url) {
         i++;
         int tld_start = i;
         while (i < len && url[i] != '.') {
-            if (!isalpha((unsigned char)url[i])) return 0;
+            if (!isAlphaChar(url[i])) return 0;
             i++;
         }
         if (i - tld_start < 2) return 0;
@@ -67,7 +78,7 @@ int isValidNumeric(const char *s) {
     if (!s || s[0] == '\0') return 0;
     int len = 0;
     for (int i = 0; s[i]; i++) {
-        if (!isdigit((unsigned char)s[i])) return 0;
+        if (!isDigitChar(s[i])) return 0;
         len++;
     }
     if (len == 0 || len > 6) return 0;
